@@ -27,10 +27,11 @@ private:
 
 public:
 	enum Resource {
-		WOOD, STONE
+		WOOD, STONE, NONE
 	};
 
-	bool TrySpend(int amount, Resource type);
+	bool CanSpend(int amount, Resource type);
+	void Spend(int amount, Resource type);
 	void Collect(int amount, Resource type);
 	void SetResourceCount(int amount, Resource type);
 	void AddSilo();

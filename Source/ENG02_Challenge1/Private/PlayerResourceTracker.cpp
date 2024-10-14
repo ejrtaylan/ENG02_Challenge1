@@ -3,21 +3,19 @@
 
 #include "PlayerResourceTracker.h"
 
-bool UPlayerResourceTracker::TrySpend(int amount, Resource type) {
-	if (amount <= GetCurrResource(type)) {
-		switch (type) {
-		case Resource::WOOD:
-			CurrWoodCount -= amount;
-			break;
-		case Resource::STONE:
-			CurrStoneCount -= amount;
-			break;
-		}
+bool UPlayerResourceTracker::CanSpend(int amount, Resource type) {
+	return amount <= GetCurrResource(type);
+}
 
-		return true;
-	} 
-
-	return false;
+void UPlayerResourceTracker::Spend(int amount, Resource type) {
+	switch (type) {
+	case Resource::WOOD:
+		CurrWoodCount -= amount;
+		break;
+	case Resource::STONE:
+		CurrStoneCount -= amount;
+		break;
+	}
 }
 
 void UPlayerResourceTracker::Collect(int amount, Resource type) {
