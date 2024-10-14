@@ -25,6 +25,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere)
-	UPlayerResourceTracker::Resource ResourceType;
+	bool isStone = false;
 
+	UPlayerResourceTracker::Resource ResourceType;
 };

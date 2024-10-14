@@ -8,15 +8,15 @@
 #include "SiloBuyer.h"
 
 // Sets default values
-ASiloBuyer::ASiloBuyer()
+USiloBuyer::USiloBuyer()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = true;
 
 }
 
 // Called when the game starts or when spawned
-void ASiloBuyer::BeginPlay()
+void USiloBuyer::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -24,9 +24,9 @@ void ASiloBuyer::BeginPlay()
 }
 
 // Called every frame
-void ASiloBuyer::Tick(float DeltaTime)
+void USiloBuyer::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::Tick(DeltaTime);
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	APawn* thePlayer = this->GetWorld()->GetFirstPlayerController()->GetPawn();
 	if (this->triggerVolume->IsOverlappingActor(thePlayer)) {
@@ -41,12 +41,13 @@ void ASiloBuyer::Tick(float DeltaTime)
 	}
 }
 
-bool ASiloBuyer::TryBuySilo(){
+bool USiloBuyer::TryBuySilo(){
 	if (
 		this->ResourceTracker->CanSpend(SILO_COST, costType)
 	) {
 		this->ResourceTracker->Spend(SILO_COST, costType);
 
+		ResourceTracker->AddSilo();
 		this->ActivateSilo();
 		return true;
 	} 
@@ -54,11 +55,11 @@ bool ASiloBuyer::TryBuySilo(){
 	return false;
 }
 
-void ASiloBuyer::ActivateSilo() {
+void USiloBuyer::ActivateSilo() {
 
 }
 
-void ASiloBuyer::DeactivateBuyer() {
+void USiloBuyer::DeactivateBuyer() {
 
 }
 

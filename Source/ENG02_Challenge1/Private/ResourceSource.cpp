@@ -17,6 +17,12 @@ void AResourceSource::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (isStone) {
+		this->ResourceType = UPlayerResourceTracker::Resource::STONE;
+	}
+	else {
+		this->ResourceType = UPlayerResourceTracker::Resource::WOOD;
+	}
 }
 
 // Called every frame

@@ -8,14 +8,14 @@
 #include "PlayerResourceTracker.h"
 #include "SiloBuyer.generated.h"
 
-UCLASS()
-class ENG02_CHALLENGE1_API ASiloBuyer : public AActor
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+class ENG02_CHALLENGE1_API USiloBuyer : public UActorComponent
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ASiloBuyer();
+	USiloBuyer();
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,7 +23,7 @@ protected:
 
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	const int SILO_COST = 50;
 	UPlayerResourceTracker::Resource costType = UPlayerResourceTracker::Resource::WOOD;
