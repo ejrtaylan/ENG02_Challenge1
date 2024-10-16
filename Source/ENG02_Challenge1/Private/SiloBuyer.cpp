@@ -20,7 +20,7 @@ void USiloBuyer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	this->ResourceTracker = Cast<UPlayerResourceTracker>(GetGameInstance());
+	this->ResourceTracker = Cast<UPlayerResourceTracker>(this->GetWorld()->GetGameInstance());
 }
 
 // Called every frame

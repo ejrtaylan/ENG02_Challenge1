@@ -7,14 +7,14 @@
 #include "PlayerResourceTracker.h"
 #include "ResourceSource.generated.h"
 
-UCLASS()
-class ENG02_CHALLENGE1_API AResourceSource : public AActor
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+class ENG02_CHALLENGE1_API UResourceSource : public UActorComponent
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AResourceSource();
+	UResourceSource();
 	
 protected:
 	// Called when the game starts or when spawned
@@ -22,7 +22,7 @@ protected:
 
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UPROPERTY(EditAnywhere)
 	bool isStone = false;

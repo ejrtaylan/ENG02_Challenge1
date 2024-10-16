@@ -9,14 +9,14 @@
 #include "ResourceSource.h"
 #include "WorkeMoverCollector.generated.h"
 
-UCLASS()
-class ENG02_CHALLENGE1_API AWorkeMoverCollector : public AActor
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+class ENG02_CHALLENGE1_API UWorkeMoverCollector: public UActorComponent
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this pawn's properties
-	AWorkeMoverCollector();
+	UWorkeMoverCollector();
 
 protected:
 	// Called when the game starts or when spawned
@@ -24,7 +24,7 @@ protected:
 
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void MoveActorTo(FVector targetPoint);
 
@@ -32,16 +32,18 @@ public:
 	AActor* RobotActor;
 
 	UPROPERTY(EditAnywhere)
+	AActor* Base;
+
+	UPROPERTY(EditAnywhere)
+	AActor* UpgraderPlate;
+
+	UPROPERTY(EditAnywhere)
+	AActor* Resource;
+
+	UWorkerUpgrader* Upgrader;
+	UResourceSource* ResourceSource;
 	FTransform CollectionPoint;
-
-	UPROPERTY(EditAnywhere)
 	FTransform DropoffPoint;
-
-	UPROPERTY(EditAnywhere)
-	AWorkerUpgrader* Upgrader;
-
-	UPROPERTY(EditAnywhere)
-	AResourceSource* ResourceSource;
 
 	UPlayerResourceTracker* ResourceTracker;
 	UPlayerResourceTracker::Resource carryingResource;

@@ -4,25 +4,25 @@
 #include "WorkerUpgrader.h"
 
 // Sets default values
-AWorkerUpgrader::AWorkerUpgrader()
+UWorkerUpgrader::UWorkerUpgrader()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = true;
 
 }
 
 // Called when the game starts or when spawned
-void AWorkerUpgrader::BeginPlay()
+void UWorkerUpgrader::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	this->ResourceTracker = Cast<UPlayerResourceTracker>(GetGameInstance());
+	this->ResourceTracker = Cast<UPlayerResourceTracker>(GetWorld()->GetGameInstance());
 }
 
 // Called every frame
-void AWorkerUpgrader::Tick(float DeltaTime)
+void UWorkerUpgrader::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::Tick(DeltaTime);
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	APawn* thePlayer = this->GetWorld()->GetFirstPlayerController()->GetPawn();
 	if (this->triggerVolume->IsOverlappingActor(thePlayer)) {
@@ -39,7 +39,7 @@ void AWorkerUpgrader::Tick(float DeltaTime)
 		this->DeactivateUpgrader();
 }
 
-bool AWorkerUpgrader::TryUpgradeWorker() {
+bool UWorkerUpgrader::TryUpgradeWorker() {
 	if (this->WorkerLevel >= MAX_WORKER_LEVEL)
 		return false;
 
@@ -59,7 +59,7 @@ bool AWorkerUpgrader::TryUpgradeWorker() {
 	return false;
 }
 
-int AWorkerUpgrader::GetResourceCollected(UPlayerResourceTracker::Resource type) {
+int UWorkerUpgrader::GetResourceCollected(UPlayerResourceTracker::Resource type) {
 	if (this->WorkerLevel == 0) return 0;
 
 	switch (type) {
@@ -72,7 +72,7 @@ int AWorkerUpgrader::GetResourceCollected(UPlayerResourceTracker::Resource type)
 	return 0;
 }
 
-float AWorkerUpgrader::GetWorkerSpeedMult() {
+float UWorkerUpgrader::GetWorkerSpeedMult() {
 	if (this->WorkerLevel == 0) return -1.0f;
 	if (this->WorkerLevel <= 2) return 0.0f;
 	if (this->WorkerLevel == 3) return 0.05f;
@@ -80,7 +80,7 @@ float AWorkerUpgrader::GetWorkerSpeedMult() {
 	return 0.15f;
 }
 
-void AWorkerUpgrader::UpdateUpgradeCosts() {
+void UWorkerUpgrader::UpdateUpgradeCosts() {
 	switch (this->WorkerLevel) {
 	case 1:
 		this->nextUpgradeCostWood = 10;
@@ -101,10 +101,10 @@ void AWorkerUpgrader::UpdateUpgradeCosts() {
 	}
 }
 
-void AWorkerUpgrader::ActivateWorker() {
+void UWorkerUpgrader::ActivateWorker() {
 
 }
 
-void AWorkerUpgrader::DeactivateUpgrader() {
+void UWorkerUpgrader::DeactivateUpgrader() {
 
 }

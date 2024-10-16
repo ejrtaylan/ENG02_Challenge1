@@ -5,15 +5,15 @@
 #include "ResourceSource.h"
 
 // Sets default values
-AResourceSource::AResourceSource()
+UResourceSource::UResourceSource()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = true;
 
 }
 
 // Called when the game starts or when spawned
-void AResourceSource::BeginPlay()
+void UResourceSource::BeginPlay()
 {
 	Super::BeginPlay();
 	
@@ -26,9 +26,9 @@ void AResourceSource::BeginPlay()
 }
 
 // Called every frame
-void AResourceSource::Tick(float DeltaTime)
+void UResourceSource::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::Tick(DeltaTime);
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 }
 

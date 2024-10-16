@@ -4,31 +4,35 @@
 #include "WorkeMoverCollector.h"
 
 // Sets default values
-AWorkeMoverCollector::AWorkeMoverCollector()
+UWorkeMoverCollector::UWorkeMoverCollector()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = true;
 
 }
 
 // Called when the game starts or when spawned
-void AWorkeMoverCollector::BeginPlay()
+void UWorkeMoverCollector::BeginPlay()
 {
 	Super::BeginPlay();
 
-	this->ResourceTracker = Cast<UPlayerResourceTracker>(GetGameInstance());
+	this->ResourceTracker = Cast<UPlayerResourceTracker>(GetWorld()->GetGameInstance());
+
+	this->Upgrader = this->UpgraderPlate->GetComponentByClass<UWorkerUpgrader>();
+	this->ResourceSource = this->Resource->GetComponentByClass<UResourceSource>();
+	this->CollectionPoint = this->Resource->GetTransform();
+	this->DropoffPoint = this->Base->GetTransform();
 
 	this->DropoffVec = this->DropoffPoint.GetLocation();
 	this->CollectVec = this->CollectionPoint.GetLocation();
 
 	this->carryingResource = this->ResourceSource->ResourceType;
-
 }
 
 // Called every frame
-void AWorkeMoverCollector::Tick(float DeltaTime)
+void UWorkeMoverCollector::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::Tick(DeltaTime);
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	if (this->isGoingToDropoff) {
 		this->MoveActorTo(this->DropoffVec);
@@ -45,7 +49,7 @@ void AWorkeMoverCollector::Tick(float DeltaTime)
 	}
 }
 
-void AWorkeMoverCollector::MoveActorTo(FVector targetPoint) {
+void UWorkeMoverCollector::MoveActorTo(FVector targetPoint) {
 	FVector currentPosition = this->RobotActor->GetTransform().GetLocation();
 
 	if (FVector::Distance(currentPosition, targetPoint) <= errorDist)
