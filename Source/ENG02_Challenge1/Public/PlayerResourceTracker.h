@@ -21,12 +21,12 @@ private:
 	const int PER_SILO_WOOD = 100;
 	const int PER_SILO_STONE = 25;
 
+public:
 	int CurrWoodCount = INIT_WOOD_COUNT;
 	int CurrStoneCount = INIT_STONE_COUNT;
 	int CurrSiloCount = INIT_SILO_COUNT;
 	int CurrWorkerCount = 0;
 
-public:
 	enum Resource {
 		WOOD, STONE, NONE
 	};
