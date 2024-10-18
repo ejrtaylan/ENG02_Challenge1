@@ -15,7 +15,7 @@ class ENG02_CHALLENGE1_API UPlayerResourceTracker : public UGameInstance
 	GENERATED_BODY()
 	
 private:
-	const int INIT_WOOD_COUNT = 100;
+	const int INIT_WOOD_COUNT = 150;
 	const int INIT_STONE_COUNT = 0;
 	const int INIT_SILO_COUNT = 0;
 	const int PER_SILO_WOOD = 100;
