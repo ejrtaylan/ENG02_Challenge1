@@ -23,6 +23,7 @@ void UPlayerResourceTracker::Collect(int amount, Resource type) {
 	if (newTotal <= GetMaxResource(type)) {
 		SetResourceCount(newTotal, type);
 	}
+	else SetResourceCount(GetMaxResource(type), type);
 }
 
 void UPlayerResourceTracker::SetResourceCount(int amount, Resource type) {

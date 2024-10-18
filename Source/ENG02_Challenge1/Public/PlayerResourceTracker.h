@@ -22,9 +22,13 @@ private:
 	const int PER_SILO_STONE = 25;
 
 public:
+	UPROPERTY(BlueprintReadWrite)
 	int CurrWoodCount = INIT_WOOD_COUNT;
+	UPROPERTY(BlueprintReadWrite)
 	int CurrStoneCount = INIT_STONE_COUNT;
+	UPROPERTY(BlueprintReadWrite)
 	int CurrSiloCount = INIT_SILO_COUNT;
+	UPROPERTY(BlueprintReadWrite)
 	int CurrWorkerCount = 0;
 
 	enum Resource {

@@ -68,7 +68,7 @@ void USiloBuyer::ActivateSilo() {
 }
 
 void USiloBuyer::DeactivateBuyer() {
-	this->GetOwner()->SetActorRelativeLocation(this->GetOwner()->GetActorLocation() + FVector(0.0f, 0.0f, -10.0f));
+	this->GetOwner()->SetActorRelativeLocation(this->GetOwner()->GetActorLocation() + FVector(0.0f, 0.0f, -20.0f));
 	this->BoughtAlready = true;
 }
 

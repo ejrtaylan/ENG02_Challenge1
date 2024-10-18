@@ -56,7 +56,7 @@ bool UWorkerUpgrader::TryUpgradeWorker() {
 		this->ResourceTracker->Spend(nextUpgradeCostStone, UPlayerResourceTracker::Resource::STONE);
 
 		this->WorkerLevel++;
-		if (this->WorkerLevel == 0) this->ActivateWorker();
+		if (this->WorkerLevel == 1) this->ActivateWorker();
 		this->UpdateUpgradeCosts();
 		return true;
 	}
