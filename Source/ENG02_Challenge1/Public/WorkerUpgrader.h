@@ -30,7 +30,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	UBoxComponent* triggerVolume = nullptr;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AActor* targetWorker = nullptr;
 
 	UPlayerResourceTracker* ResourceTracker = nullptr;
