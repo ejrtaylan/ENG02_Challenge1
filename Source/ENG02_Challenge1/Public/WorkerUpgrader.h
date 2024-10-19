@@ -35,6 +35,7 @@ public:
 
 	UPlayerResourceTracker* ResourceTracker = nullptr;
 
+	UPROPERTY(BlueprintReadWrite)
 	int WorkerLevel = 0;
 	
 	int nextUpgradeCostWood = 20;

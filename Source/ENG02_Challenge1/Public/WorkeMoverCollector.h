@@ -33,7 +33,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	AActor* Base;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AActor* UpgraderPlate;
 
 	UPROPERTY(EditAnywhere)
@@ -54,5 +54,10 @@ public:
 	float MoveSpeed = 5.0f;
 
 	float errorDist = 1.2f;
+
+	UPROPERTY(BlueprintReadWrite)
 	bool isGoingToDropoff = false;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool isCollectingStone = false;
 };

@@ -29,6 +29,8 @@ public:
 	UPlayerResourceTracker::Resource costType = UPlayerResourceTracker::Resource::WOOD;
 
 	bool WasInsideVolume = false;
+
+	UPROPERTY(BlueprintReadWrite)
 	bool BoughtAlready = false;
 
 	UPlayerResourceTracker* ResourceTracker;
@@ -36,7 +38,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	UBoxComponent* triggerVolume;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AActor* targetSilo;
 
 	bool TryBuySilo();

@@ -27,10 +27,12 @@ void UWorkeMoverCollector::BeginPlay()
 	this->CollectVec = this->CollectionPoint.GetLocation();
 
 	this->carryingResource = this->ResourceSource->ResourceType;
+	if (this->carryingResource == UPlayerResourceTracker::Resource::STONE)
+		this->isCollectingStone = true;
+
 	this->errorDist = this->MoveSpeed * 1.1;
 
 	this->RobotActor = this->GetOwner();
-
 }
 
 // Called every frame
