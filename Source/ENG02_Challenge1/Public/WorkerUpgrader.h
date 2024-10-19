@@ -43,6 +43,10 @@ public:
 
 	bool WasInsideVolume = false;
 
+	const float PLATE_WAIT_TIME = 5.0f;
+	bool IsWaitingTimer = false;
+	FTimerHandle plateTimer;
+
 	bool TryUpgradeWorker();
 	int GetResourceCollected(UPlayerResourceTracker::Resource type);
 	float GetWorkerSpeedMult();
@@ -50,4 +54,5 @@ public:
 	void UpdateUpgradeCosts();
 	void ActivateWorker();
 	void DeactivateUpgrader();
+	void TimerEnd();
 };

@@ -28,14 +28,14 @@ void UWorkerUpgrader::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	APawn* thePlayer = this->GetWorld()->GetFirstPlayerController()->GetPawn();
 	if (this->triggerVolume->IsOverlappingActor(thePlayer)) {
 
-		if (!this->WasInsideVolume && this->WorkerLevel < MAX_WORKER_LEVEL) {
+		if (!this->WasInsideVolume && this->WorkerLevel < MAX_WORKER_LEVEL && !this->IsWaitingTimer) {
 			this->GetOwner()->SetActorRelativeLocation(this->GetOwner()->GetActorLocation() + FVector(0.0f, 0.0f, -5.0f));
 			this->WasInsideVolume = true;
 			this->TryUpgradeWorker();
 		}
 	}
 	else {
-		if(this->WasInsideVolume)
+		if(this->WasInsideVolume && !this->IsWaitingTimer)
 			this->GetOwner()->SetActorRelativeLocation(this->GetOwner()->GetActorLocation() + FVector(0.0f, 0.0f, 5.0f));
 		this->WasInsideVolume = false;
 	}
@@ -57,6 +57,16 @@ bool UWorkerUpgrader::TryUpgradeWorker() {
 
 		this->WorkerLevel++;
 		if (this->WorkerLevel == 1) this->ActivateWorker();
+
+		this->IsWaitingTimer = true;
+		GetWorld()->GetTimerManager().SetTimer(
+			plateTimer,
+			this,
+			&UWorkerUpgrader::TimerEnd,
+			PLATE_WAIT_TIME,
+			false
+		);
+
 		this->UpdateUpgradeCosts();
 		return true;
 	}
@@ -112,4 +122,11 @@ void UWorkerUpgrader::ActivateWorker() {
 
 void UWorkerUpgrader::DeactivateUpgrader() {
 	this->GetOwner()->SetActorRelativeLocation(this->GetOwner()->GetActorLocation() + FVector(0.0f, 0.0f, -10.0f));
+}
+
+void UWorkerUpgrader::TimerEnd() {
+	this->IsWaitingTimer = false;
+	if (!this->WasInsideVolume)
+		this->GetOwner()->SetActorRelativeLocation(this->GetOwner()->GetActorLocation() + FVector(0.0f, 0.0f, 5.0f));
+
 }
